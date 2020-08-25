@@ -1,5 +1,5 @@
 #!/bin/sh
-# Marc Tönsing - V1.1 - 18.05.2018
+# Marc Tönsing - V1.1 - 25.08.2020
 # Minecraft Server restart and pi reboot.
 screen -Rd minecraft -X stuff "say Server is restarting in 30 seconds! $(printf '\r')"
 sleep 23s
@@ -21,6 +21,6 @@ screen -Rd minecraft -X stuff "say Closing server...$(printf '\r')"
 screen -Rd minecraft -X stuff "stop $(printf '\r')"
 sleep 15s
 echo "Updating to most recent paperclip version."
-wget -q -O /home/pi/minecraft/paperclip.jar https://papermc.io/api/v1/paper/1.16.1/latest/download
+wget -q -O /home/pi/minecraft/paperclip.jar https://papermc.io/api/v1/paper/1.16.2/latest/download
 echo "Restarting now."
 sudo /sbin/reboot
