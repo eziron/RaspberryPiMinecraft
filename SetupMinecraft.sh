@@ -1,7 +1,7 @@
 #!/bin/bash
 # Original Minecraft Server Installation Script - James A. Chambers - https://www.jamesachambers.com.
 # Changes and simplifications by Marc Tönsing
-# V1.16.1 05.07.20
+# V1.16.5 20.01.21
 # GitHub Repository: https://github.com/mtoensing/RaspberryPiMinecraft
 
 echo "Minecraft Server installation script by James Chambers and Marc Tönsing - V1.0"
@@ -26,7 +26,7 @@ mkdir minecraft
 cd minecraft
 
 echo "Getting latest Paper Minecraft server..."
-wget -O paperclip.jar https://papermc.io/api/v1/paper/1.16.4/latest/download
+wget -O paperclip.jar https://papermc.io/api/v1/paper/1.16.5/latest/download
 
 echo "Building the Minecraft server... "
 java -jar -Xms800M -Xmx800M paperclip.jar
