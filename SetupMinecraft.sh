@@ -124,7 +124,7 @@ echo -e "$LIME_YELLOW \nDownload start.sh ... $NORMAL"
 wget -O start.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/start.sh
 
 echo /usr/bin/screen -dmS minecraft $java_dir/bin/java -jar -Xms2500M -Xmx2500M -Dcom.mojang.eula.agree=true ~/minecraft/paperclip.jar >> start.sh
-sudo chmod +x start.sh
+chmod +x start.sh
 
 echo -e "$LIME_YELLOW\nChecking for total memory available...$NORMAL"
 TotalMemory=$(awk '/MemTotal/ { printf "%.0f\n", $2/1024 }' /proc/meminfo)
@@ -135,7 +135,7 @@ if [ $TotalMemory -lt 3000 ]; then
   wget -O start_lowspec.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/start_lowspec.sh
 
   echo /usr/bin/screen -dmS minecraft $java_dir/bin/java -jar -Xms800M -Xmx800M -Dcom.mojang.eula.agree=true ~/minecraft/paperclip.jar >> start_lowspec.sh
-  sudo chmod +x start_lowspec.sh
+  chmod +x start_lowspec.sh
 fi
 
 #Download Restar script
