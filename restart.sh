@@ -28,3 +28,4 @@ screen -Rd minecraft -X stuff "say Closing server...$(printf '\r')"
 screen -Rd minecraft -X stuff "stop $(printf '\r')"
 sleep 15s
 echo "Updating to most recent paperclip version."
+
