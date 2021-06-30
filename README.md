@@ -1,10 +1,16 @@
-# Minecraft 1.16.5 auf dem Raspberry Pi 
+# Minecraft Server 1.8.8 - 1.17 for ARM64
 
-Eine deutsche Anleitung für die Konfigration eines Raspberry Pi mit Paper als stabiler Minecraft Server findet ihr hier:
-http://marc.tv/stabiler-minecraft-server-raspberry-pi
+script for an easy creation and configuration of a server for minecraft with paperMC in ARM64
 
-This is an early fork of the original version found here: https://www.jamesachambers.com/2018/03/fast-raspberry-pi-minecraft-server-install-script/ I wanted to keep my setup very basic so that it works 100% of the time without anything special.
+I have relied on the scripts of:
+James A. Chambers - https://www.jamesachambers.com.
+Marc Tönsing - https://github.com/mtoensing/RaspberryPiMinecraft
 
-# Watch the video tutorial
+so far it has been tested with:
+-Nvidia Jetson Nano 4Gb
 
-[![Watch the video](https://img.youtube.com/vi/t1cr2UasuhQ/maxresdefault.jpg)](https://youtu.be/t1cr2UasuhQ)
+if you have tested on another board, please add to this list
+
+# Install Minecraft server
+
+
