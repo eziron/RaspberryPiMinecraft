@@ -54,7 +54,7 @@ else
     mkdir minecraft
 fi
 
-cd minecraft
+cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
 echo "  1) 1.17"
@@ -139,7 +139,7 @@ if [ $TotalMemory -lt 3000 ]; then
 fi
 
 #Download Restar script
-echo -e "$LIME_YELLOW\nDownload Restar start.sh ... $NORMAL"
+echo -e "$LIME_YELLOW\nDownload restar.sh ... $NORMAL"
 wget -O restart.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/restart.sh
 
 echo sudo rm ~/minecraft/paperclip.jar >> restart.sh
@@ -148,16 +148,25 @@ echo echo "rebooting the board now..." >> restart.sh
 echo sudo reboot >> restart.sh
 chmod +x restart.sh
 
-if  [ "$clean_install" = "yes" ]; then
-  echo -e "$LIME_YELLOW\nconfigure Server$NORMAL"
+#Download optimization script
+echo -e "$LIME_YELLOW\nDownload optimize_server.sh ... $NORMAL"
+wget -O optimize_server.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/optimize_server.sh
 
+echo sudo rm ~/minecraft/paperclip.jar >> optimize_server.sh
+echo wget -O paperclip.jar https://papermc.io/api/v1/paper/$Version/latest/download >> optimize_server.sh
+chmod +x optimize_server.sh
+
+if  [ "$clean_install" = "yes" ]; then
+  echo -e "$LIME_YELLOW\nConfigure server.properties file$NORMAL"
+
+  #Configure server-name and motd in server.properties
   echo -e "$LIME_YELLOW\nEnter a name for your server $NORMAL"
   read -p '   Server Name: ' servername
   echo "server-name=$servername" > server.properties
   echo "motd=$servername" >> server.properties
 
 
-
+  #Configure gamemode in server.properties
   echo -e "$LIME_YELLOW\nEnter a gamemode for your server $NORMAL"
   echo "  1) survival"
   echo "  2) creative"
@@ -169,7 +178,7 @@ if  [ "$clean_install" = "yes" ]; then
     *) echo "set gamemode by default"
   esac
 
-
+  #Configure difficulty in server.properties
   echo -e "$LIME_YELLOW\nEnter a difficulty for your server $NORMAL"
   echo "  1) peaceful"
   echo "  2) easy"
@@ -185,6 +194,22 @@ if  [ "$clean_install" = "yes" ]; then
     *) echo "set difficulty by default"
   esac
 
+  #Configure level-type in server.properties
+  echo -e "$LIME_YELLOW\nWhat kind of world do you want on your server? $NORMAL"
+  echo "  1) default"
+  echo "  2) flat"
+  echo "  3) largeBiomes"
+  echo "  4) amplified"
+  read -p "choose an option: " servertype
+
+  case $servertype in
+    2|flat)     echo "level-type=flat"     >> server.properties;;
+    3|largeBiomes)   echo "level-type=largeBiomes"   >> server.properties;;
+    4|amplified)     echo "level-type=amplified"     >> server.properties;;
+    *) echo "set difficulty by default"
+  esac
+
+  #Configure hardcore in server.properties
   echo -e "$LIME_YELLOW\n(you can't revive when you die)"
   read -p "hardcore? yes/no: " serverhard
   if  [[ "$serverhard" = "yes" || "$serverhard" = "y" ]]; 
@@ -192,6 +217,7 @@ if  [ "$clean_install" = "yes" ]; then
     echo "hardcore=true"  >> server.properties
   fi
 
+  #Configure pvp in server.properties
   echo -e "$\n(attacks between players)"
   read -p "pvp? yes/no: " serverpvp
   if  [[ "$serverpvp" = "no" || "$serverpvp" = "n" ]]; 
@@ -199,21 +225,26 @@ if  [ "$clean_install" = "yes" ]; then
     echo "pvp=false"  >> server.properties
   fi
 
+  #Configure online-mode in server.properties
   read -p "do you want to support pirate players? yes/no: " serveronline
   if  [[ "$serveronline" = "yes" || "$serveronline" = "y" ]]; 
   then
     echo "online-mode=false"  >> server.properties
   fi
 
+  #Configure max-players in server.properties
   read -p "maximum number of players?: " servermax
   if [ $servermax -gt 0 ]; then
     echo "max-players=$servermax"  >> server.properties
   fi
 
+  #and other recommended settings
   echo "snooper-enabled=false"  >> server.properties
   echo "network-compression-threshold=512" >> server.properties
   echo "max-tick-time=120000" >> server.properties
+  echo "spawn-protection=0/g" >> server.properties
 
+  #running the server to generate the world
   echo -e "\nBuilding the Minecraft server... $NORMAL"
   $java_dir/bin/java -jar -Xms800M -Xmx800M ~/minecraft/paperclip.jar
 
