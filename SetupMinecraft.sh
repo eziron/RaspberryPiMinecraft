@@ -34,14 +34,14 @@ if [ -d "minecraft" ]; then
     case $Option_A in
         1|clean|restart|"clean and restart all")
             echo -e "\ndeleting all files from server  (~/minecraft) ..."
-            sudo rm -rf ~minecraft/
+            sudo rm -rf ~/minecraft/
             clean_install="yes" 
             echo "Creating minecraft server directory  (~/minecraft) ..."
-            mkdir minecraft ;;
+            mkdir ~/minecraft ;;
 
         2|update|upgrade|"update/upgrade")
             echo -e "\ndeleting some files from the server for update..."
-            sudo rm -rf ~minecraft/jdk* ~minecraft/java* ~minecraft/start.sh ~minecraft/start_lowspec.sh
+            sudo rm -rf ~/minecraft/jdk* ~/minecraft/java* ~/minecraft/start.sh ~/minecraft/start_lowspec.sh
             clean_install="no" ;;
 
         3|exit|*)
