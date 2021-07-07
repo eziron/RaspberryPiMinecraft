@@ -1,4 +1,4 @@
-# Minecraft Server 1.8.8 - 1.17 for ARM64
+# Minecraft Server 1.8.8 - 1.17.1 for ARM64
 
 script for an easy creation and configuration of a server for minecraft with paperMC in ARM64
 
@@ -43,7 +43,7 @@ In the case that you already have to create a server, this same script allows yo
 
 All the text in English is translated with Google Translator, do not hesitate to propose changes if something is wrongly translated
 
-# Minecraft Server 1.8.8 - 1.17 en ARM64 (Español)
+# Minecraft Server 1.8.8 - 1.17.1 en ARM64 (Español)
 
 Script para una fácil instalación y configuración de un servidor de minecraft con papperMC en placas ARM64
 
