@@ -57,47 +57,51 @@ fi
 cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
-echo "  1) 1.17.1"
-echo "  2) 1.16.5"
-echo "  3) 1.15.2"
-echo "  4) 1.14.4"
-echo "  5) 1.13.2"
-echo "  6) 1.12.2"
-echo "  7) 1.11.2"
-echo "  8) 1.10.2"
-echo "  9) 1.9.4"
-echo "  10) 1.8.8"
+echo "  1) 1.18"
+echo "  2) 1.17.1"
+echo "  3) 1.16.5"
+echo "  4) 1.15.2"
+echo "  5) 1.14.4"
+echo "  6) 1.13.2"
+echo "  7) 1.12.2"
+echo "  8) 1.11.2"
+echo "  9) 1.10.2"
+echo "  10) 1.9.4"
+echo "  11) 1.8.8"
 
 read -p "choose an option: " Option_B
 case $Option_B in
-    1|1.17|1.17.1)
+    1|1.18)
+        Version="1.18";;
+        
+    2|1.17|1.17.1)
         Version="1.17.1";;
 
-    2|1.16|1.16.5)
+    3|1.16|1.16.5)
         Version="1.16.5";;
 
-    3|1.15|1.15.2)
+    4|1.15|1.15.2)
         Version="1.15.2";;
 
-    4|1.14|1.14.4)
+    5|1.14|1.14.4)
         Version="1.14.4";;
     
-    5|1.13|1.13.2)
+    6|1.13|1.13.2)
         Version="1.13.2";;
 
-    6|1.12|1.12.2)
+    7|1.12|1.12.2)
         Version="1.12.2";;
 
-    7|1.11|1.11.2)
+    8|1.11|1.11.2)
         Version="1.11.2";;
 
-    8|1.10|1.10.2)
+    9|1.10|1.10.2)
         Version="1.10.2";;
 
-    9|1.9|1.9.4)
+    10|1.9|1.9.4)
         Version="1.9.4";;
 
-    10|1.8|1.8.8)
+    11|1.8|1.8.8)
         Version="1.8.8";;
 
     *)
@@ -110,11 +114,11 @@ wget -O paperclip.jar https://papermc.io/api/v1/paper/$Version/latest/download
 
 
 #https://jdk.java.net/16/
-echo -e "$LIME_YELLOW\ndownload java openjdk 16... $NORMAL"
-wget -O java16_install.tar.gz https://download.java.net/java/GA/jdk16.0.1/7147401fd7354114ac51ef3e1328291f/9/GPL/openjdk-16.0.1_linux-aarch64_bin.tar.gz
-echo -e "$LIME_YELLOW\nunzip java openjdk 16... $NORMAL"
+echo -e "$LIME_YELLOW\ndownload java openjdk 17... $NORMAL"
+wget -O java16_install.tar.gz https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-aarch64_bin.tar.gz
+echo -e "$LIME_YELLOW\nunzip java openjdk 17... $NORMAL"
 sudo tar -xzf java16_install.tar.gz
-java_dir=~/minecraft/jdk-16.0.1
+java_dir=~/minecraft/jdk-17.0.1
 
 echo -e "$LIME_YELLOW\njava version: $NORMAL"
 $java_dir/bin/java -version
