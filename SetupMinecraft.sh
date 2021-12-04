@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #script for an easy creation and configuration of a server for minecraft with paperMC in ARM64 by Eziron
-# 1.17.1 - 1.8.8    date:30/06/2021
+# 1.18 - 1.8.8    date:30/06/2021
 
 # I have relied on the scripts of:
 # James A. Chambers - https://github.com/TheRemote/RaspberryPiMinecraft
@@ -109,15 +109,21 @@ case $Option_B in
         exit 1;;
 esac
 
+Print_Style "Getting latest Paper Minecraft server..." "$YELLOW"
+BuildJSON=$(curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" https://papermc.io/api/v2/projects/paper/versions/$Version)
+Build=$(echo "$BuildJSON" | rev | cut -d, -f 1 | cut -d] -f 2 | rev)
+Build=$(($Build + 0))
+
 echo -e "$LIME_YELLOW\ndownload paperMC... $NORMAL"
-wget -O paperclip.jar https://papermc.io/api/v1/paper/$Version/latest/download
+curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o paperclip.jar "https://papermc.io/api/v2/projects/paper/versions/$Version/builds/$Build/downloads/paper-$Version-$Build.jar"
 
 
-#https://jdk.java.net/16/
+
+#https://jdk.java.net/17/
 echo -e "$LIME_YELLOW\ndownload java openjdk 17... $NORMAL"
-wget -O java16_install.tar.gz https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-aarch64_bin.tar.gz
+wget -O java17_install.tar.gz https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-aarch64_bin.tar.gz
 echo -e "$LIME_YELLOW\nunzip java openjdk 17... $NORMAL"
-sudo tar -xzf java16_install.tar.gz
+sudo tar -xzf java17_install.tar.gz
 java_dir=~/minecraft/jdk-17.0.1
 
 echo -e "$LIME_YELLOW\njava version: $NORMAL"
