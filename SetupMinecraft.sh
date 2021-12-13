@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #script for an easy creation and configuration of a server for minecraft with paperMC in ARM64 by Eziron
-# 1.18 - 1.8.8    date:30/06/2021
+# 1.18.1 - 1.8.8    date:30/06/2021
 
 # I have relied on the scripts of:
 # James A. Chambers - https://github.com/TheRemote/RaspberryPiMinecraft
@@ -57,7 +57,7 @@ fi
 cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
-echo "  1) 1.18"
+echo "  1) 1.18.1"
 echo "  2) 1.17.1"
 echo "  3) 1.16.5"
 echo "  4) 1.15.2"
@@ -71,8 +71,8 @@ echo "  11) 1.8.8"
 
 read -p "choose an option: " Option_B
 case $Option_B in
-    1|1.18)
-        Version="1.18";;
+    1|1.18|1.18.1)
+        Version="1.18.1";;
         
     2|1.17|1.17.1)
         Version="1.17.1";;
