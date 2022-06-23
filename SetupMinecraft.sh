@@ -125,10 +125,10 @@ curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 
 
 #https://jdk.java.net/17/
 echo -e "$LIME_YELLOW\ndownload java openjdk 17... $NORMAL"
-wget -O java_install.tar.gz https://download.java.net/openjdk/jdk18/ri/openjdk-18+36_linux-x64_bin.tar.gz
+wget -O java_install.tar.gz https://download.oracle.com/java/18/latest/jdk-18_linux-aarch64_bin.tar.gz
 echo -e "$LIME_YELLOW\nunzip java jdk ... $NORMAL"
 sudo tar -xzf java_install.tar.gz
-java_dir=~/minecraft/jdk-18
+java_dir=~/minecraft/jdk-18.0.1.1
 
 echo -e "$LIME_YELLOW\njava version: $NORMAL"
 $java_dir/bin/java -version
