@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #script for an easy creation and configuration of a server for minecraft with paperMC in ARM64 by Eziron
-# 1.18.1 - 1.8.8    date:30/06/2021
+# 1.19 - 1.8.8    date:29/07/2022
 
 # I have relied on the scripts of:
 # James A. Chambers - https://github.com/TheRemote/RaspberryPiMinecraft
@@ -122,35 +122,27 @@ echo -e "$LIME_YELLOW\ndownload paperMC... $NORMAL"
 curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o paperclip.jar "https://papermc.io/api/v2/projects/paper/versions/$Version/builds/$Build/downloads/paper-$Version-$Build.jar"
 
 
-
-#https://jdk.java.net/17/
-echo -e "$LIME_YELLOW\ndownload java openjdk 17... $NORMAL"
+echo -e "$LIME_YELLOW\ndownload java jdk... $NORMAL"
 wget -O java_install.tar.gz https://download.oracle.com/java/18/latest/jdk-18_linux-aarch64_bin.tar.gz
 echo -e "$LIME_YELLOW\nunzip java jdk ... $NORMAL"
 sudo tar -xzf java_install.tar.gz
-java_dir=~/minecraft/jdk-18.0.1.1
+java_dir=~/minecraft/jdk*
 
 echo -e "$LIME_YELLOW\njava version: $NORMAL"
 $java_dir/bin/java -version
+
+read -p "available ram: " A_RAM
 
 #Download normal start script
 echo -e "$LIME_YELLOW \nDownload start.sh ... $NORMAL"
 wget -O start.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/start.sh
 
-echo /usr/bin/screen -dmS minecraft $java_dir/bin/java -jar -Xms2500M -Xmx2500M -Dcom.mojang.eula.agree=true ~/minecraft/paperclip.jar >> start.sh
+echo /usr/bin/screen -dmS minecraft $java_dir/bin/java -jar -Xms$A_RAM -Xmx$A_RAM -Dcom.mojang.eula.agree=true ~/minecraft/paperclip.jar >> start.sh
 chmod +x start.sh
 
 echo -e "$LIME_YELLOW\nChecking for total memory available...$NORMAL"
 TotalMemory=$(awk '/MemTotal/ { printf "%.0f\n", $2/1024 }' /proc/meminfo)
 echo "  TotalMemory = $TotalMemory"
-if [ $TotalMemory -lt 3000 ]; then
-  #Download low spec start script
-  echo -e "$LIME_YELLOW\nDownload low spec start.sh ... $NORMAL"
-  wget -O start_lowspec.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/start_lowspec.sh
-
-  echo /usr/bin/screen -dmS minecraft $java_dir/bin/java -jar -Xms800M -Xmx800M -Dcom.mojang.eula.agree=true ~/minecraft/paperclip.jar >> start_lowspec.sh
-  chmod +x start_lowspec.sh
-fi
 
 #Download Restar script
 echo -e "$LIME_YELLOW\nDownload restar.sh ... $NORMAL"
@@ -161,14 +153,6 @@ echo wget -O paperclip.jar https://papermc.io/api/v1/paper/$Version/latest/downl
 echo echo "rebooting the board now..." >> restart.sh
 echo sudo reboot >> restart.sh
 chmod +x restart.sh
-
-#Download optimization script
-echo -e "$LIME_YELLOW\nDownload optimize_server.sh ... $NORMAL"
-wget -O optimize_server.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/master/optimize_server.sh
-
-echo sudo rm ~/minecraft/paperclip.jar >> optimize_server.sh
-echo wget -O paperclip.jar https://papermc.io/api/v1/paper/$Version/latest/download >> optimize_server.sh
-chmod +x optimize_server.sh
 
 if  [ "$clean_install" = "yes" ]; then
   echo -e "$LIME_YELLOW\nConfigure server.properties file$NORMAL"
