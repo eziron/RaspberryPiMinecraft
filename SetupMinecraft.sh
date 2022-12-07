@@ -57,7 +57,7 @@ fi
 cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
-echo "  1) 1.19.1"
+echo "  1) 1.19.2"
 echo "  2) 1.18.2"
 echo "  3) 1.17.1"
 echo "  4) 1.16.5"
@@ -72,8 +72,8 @@ echo "  12) 1.8.8"
 
 read -p "choose an option: " Option_B
 case $Option_B in
-    1|1.19|1.19.1)
-        Version="1.19.1";;
+    1|1.19|1.19.2)
+        Version="1.19.2";;
         
     2|1.18|1.18.2)
         Version="1.18.2";;
@@ -123,7 +123,7 @@ curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 
 
 
 echo -e "$LIME_YELLOW\ndownload java jdk... $NORMAL"
-wget -O java_install.tar.gz https://download.oracle.com/java/18/latest/jdk-18_linux-aarch64_bin.tar.gz
+wget -O java_install.tar.gz https://download.oracle.com/java/19/latest/jdk-19_linux-aarch64_bin.tar.gz
 echo -e "$LIME_YELLOW\nunzip java jdk ... $NORMAL"
 sudo tar -xzf java_install.tar.gz
 java_dir=~/minecraft/jdk*
