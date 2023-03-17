@@ -72,8 +72,8 @@ echo "  12) 1.8.8"
 
 read -p "choose an option: " Option_B
 case $Option_B in
-    1|1.19|1.19.3)
-        Version="1.19.3";;
+    1|1.19|1.19.4)
+        Version="1.19.4";;
         
     2|1.18|1.18.2)
         Version="1.18.2";;
@@ -131,6 +131,10 @@ java_dir=~/minecraft/jdk*
 echo -e "$LIME_YELLOW\njava version: $NORMAL"
 $java_dir/bin/java -version
 
+echo -e "$LIME_YELLOW\nChecking for total memory available...$NORMAL"
+TotalMemory=$(awk '/MemTotal/ { printf "%.0f\n", $2/1024 }' /proc/meminfo)
+echo "  TotalMemory = $TotalMemory"
+
 read -p "available ram: " A_RAM
 
 #Download normal start script
@@ -140,9 +144,6 @@ wget -O start.sh https://raw.githubusercontent.com/Eziron/RaspberryPiMinecraft/m
 echo /usr/bin/screen -dmS minecraft $java_dir/bin/java -jar -Xms$A_RAM -Xmx$A_RAM -Dcom.mojang.eula.agree=true ~/minecraft/paperclip.jar >> start.sh
 chmod +x start.sh
 
-echo -e "$LIME_YELLOW\nChecking for total memory available...$NORMAL"
-TotalMemory=$(awk '/MemTotal/ { printf "%.0f\n", $2/1024 }' /proc/meminfo)
-echo "  TotalMemory = $TotalMemory"
 
 #Download Restar script
 echo -e "$LIME_YELLOW\nDownload restar.sh ... $NORMAL"
