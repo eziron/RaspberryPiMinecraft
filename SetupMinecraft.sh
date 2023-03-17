@@ -57,7 +57,7 @@ fi
 cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
-echo "  1) 1.19.3"
+echo "  1) 1.19.4"
 echo "  2) 1.18.2"
 echo "  3) 1.17.1"
 echo "  4) 1.16.5"
