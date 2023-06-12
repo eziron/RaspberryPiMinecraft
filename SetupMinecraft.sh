@@ -118,7 +118,7 @@ case $Option_B in
         exit 1;;
 esac
 
-Print_Style "Getting latest Paper Minecraft server..." "$YELLOW"
+echo -e "$LIME_YELLOW\nGetting latest Paper Minecraft server... $NORMAL"
 BuildJSON=$(curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" https://papermc.io/api/v2/projects/paper/versions/$Version)
 Build=$(echo "$BuildJSON" | rev | cut -d, -f 1 | cut -d] -f 2 | rev)
 Build=$(($Build + 0))
@@ -128,7 +128,7 @@ curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 
 
 if  [ "$clean_install" = "yes" ]; then
     echo -e "$LIME_YELLOW\ndownload java jdk... $NORMAL"
-    wget -O java_install.tar.gz https://download.oracle.com/java/19/latest/jdk-19_linux-aarch64_bin.tar.gz
+    wget -O java_install.tar.gz https://download.oracle.com/java/20/latest/jdk-20_linux-aarch64_bin.tar.gz
     echo -e "$LIME_YELLOW\nunzip java jdk ... $NORMAL"
     sudo tar -xzf java_install.tar.gz
     java_dir=~/minecraft/jdk*
