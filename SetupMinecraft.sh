@@ -57,7 +57,7 @@ fi
 cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
-echo "  1) 1.20"
+echo "  1) 1.20.1"
 echo "  2) 1.19.4"
 echo "  3) 1.18.2"
 echo "  4) 1.17.1"
@@ -74,8 +74,8 @@ echo "  13) 1.8.8"
 read -p "choose an option: " Option_B
 case $Option_B in
 
-    1|1.20)
-        Version="1.20";;
+    1|1.20|1.20.1)
+        Version="1.20.1";;
 
     2|1.19|1.19.4)
         Version="1.19.4";;
