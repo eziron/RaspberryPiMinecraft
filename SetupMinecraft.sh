@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #script for an easy creation and configuration of a server for minecraft with paperMC in ARM64 by Eziron
-# 1.19.3 - 1.8.8    date:29/07/2022
+# 1.20.4 - 1.8.8    date:29/07/2022
 
 # I have relied on the scripts of:
 # James A. Chambers - https://github.com/TheRemote/RaspberryPiMinecraft
@@ -57,7 +57,7 @@ fi
 cd ~/minecraft
 
 echo -e "$LIME_YELLOW\nWhat version do you want to install? $NORMAL"
-echo "  1) 1.20.2"
+echo "  1) 1.20.4"
 echo "  2) 1.19.4"
 echo "  3) 1.18.2"
 echo "  4) 1.17.1"
@@ -74,8 +74,8 @@ echo "  13) 1.8.8"
 read -p "choose an option: " Option_B
 case $Option_B in
 
-    1|1.20|1.20.2)
-        Version="1.20.2";;
+    1|1.20|1.20.4)
+        Version="1.20.4";;
 
     2|1.19|1.19.4)
         Version="1.19.4";;
@@ -128,7 +128,7 @@ curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 
 
 if  [ "$clean_install" = "yes" ]; then
     echo -e "$LIME_YELLOW\ndownload java jdk... $NORMAL"
-    wget -O java_install.tar.gz https://download.oracle.com/java/20/latest/jdk-20_linux-aarch64_bin.tar.gz
+    wget -O java_install.tar.gz https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
     echo -e "$LIME_YELLOW\nunzip java jdk ... $NORMAL"
     sudo tar -xzf java_install.tar.gz
     java_dir=~/minecraft/jdk*
