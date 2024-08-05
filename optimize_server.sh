@@ -1,14 +1,18 @@
-#This code is by James A. Chambers
+#!/bin/bash
+# Based on the script by James A. Chambers and Marc Tönsing
+# by Eziron July 2021
+# Minecraft Server optimization script
+
+# Terminal colors
+LIME_YELLOW=$(tput setaf 190)
+NORMAL=$(tput sgr0)
 
 
-echo -e "$LIME_YELLOW \nUpdating packages... $NORMAL"
-sudo apt-get update
-
-echo -e "$LIME_YELLOW \nOptimizing the server... $NORMAL"
+echo -e "$LIME_YELLOW\nOptimizing the server...$NORMAL"
 
 cd ~/minecraft
 
-#Configure paper.yml options
+# Configure paper.yml options
 if [ -f "paper.yml" ]; then
     echo "$LIME_YELLOW Configure paper.yml options...$NORMAL"
     # early-warning-delay, early-warning-every
@@ -67,14 +71,14 @@ if [ -f "paper.yml" ]; then
     sed -i "s/keep-spawn-loaded: true/keep-spawn-loaded: false/g" paper.yml
     sed -i "s/keep-spawn-loaded-range: 10/keep-spawn-loaded-range: -1/g" paper.yml
 else
-    echo "the paper.yml file was not found, run the server to generate"
+    echo "The paper.yml file was not found, run the server to generate it."
 fi
 
-#Configure bukkit.yml options
+# Configure bukkit.yml options
 if [ -f "bukkit.yml" ]; then
-    echo "$LIME_YELLOW Configure bukkit.yml options... $NORMAL"
+    echo "$LIME_YELLOW Configure bukkit.yml options...$NORMAL"
     # monster-spawns
-    # This dictates how often (in ticks) the server will attempt to spawn a monster in a legal location. Doubling the time between attempts helps performance without hurting spawn rates. 
+    # This dictates how often (in ticks) the server will attempt to spawn a monster in a legal location. Doubling the time between attempts helps performance without hurting spawn rates.
     sed -i "s/monster-spawns: 1/monster-spawns: 2/g" bukkit.yml
     # autosave
     # This enables Bukkit's world saving function and how often it runs (in ticks). It should be 6000 (5 minutes) by default.
@@ -84,10 +88,10 @@ if [ -f "bukkit.yml" ]; then
     # Disables annoying server is overloaded messages
     sed -i "s/warn-on-overload: true/warn-on-overload: false/g" bukkit.yml
 else
-    echo "the bukkit.yml file was not found, run the server to generate"
+    echo "The bukkit.yml file was not found, run the server to generate it."
 fi
 
-#Configure spigot.yml options
+# Configure spigot.yml options
 if [ -f "spigot.yml" ]; then
     echo "$LIME_YELLOW Configure spigot.yml options...$NORMAL"
     # Merging items has a huge impact on tick consumption for ground items. Higher values allow more items to be swept into piles and allow you to avoid plugins like ClearLag.
@@ -103,12 +107,12 @@ if [ -f "spigot.yml" ]; then
     # entity-activation-range:
     sed -i -z "s/entity-activation-range:\n      animals: 32\n      monsters: 32\n      raiders: 48\n      misc: 16\n      tick-inactive-villagers: true/entity-activation-range:\n      animals: 24\n      monsters: 24\n      raiders: 48\n      misc: 12\n      tick-inactive-villagers: false/g" spigot.yml
 else
-    echo "the spigot.yml file was not found, run the server to generate"
+    echo "The spigot.yml file was not found, run the server to generate it."
 fi
 
 # Configure server.properties options
 if [ -f "server.properties" ]; then
-    echo "$LIME_YELLOW Configure server.properties options... $NORMAL"
+    echo "$LIME_YELLOW Configure server.properties options...$NORMAL"
     # Configure server.properties
     # network-compression-threshold
     # This option caps the size of a packet before the server attempts to compress it. Setting it higher can save some resources at the cost of more bandwidth, setting it to -1 disables it.
@@ -120,8 +124,6 @@ if [ -f "server.properties" ]; then
     sed -i "s/snooper-enabled=true/snooper-enabled=false/g" server.properties
     # Increase server watchdog timer to prevent it from shutting itself down without restarting
     sed -i "s/max-tick-time=60000/max-tick-time=120000/g" server.properties
+else
+    echo "The server.properties file was not found, run the server to generate it."
 fi
-
-echo "$LIME_YELLOW Updating to most recent paperclip version... $NORMAL"
-
-
